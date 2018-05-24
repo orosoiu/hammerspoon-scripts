@@ -5,6 +5,7 @@
 local animation = "sonar-out" -- valid values: sonar-out, sonar-in
 local noOfCircles = 6 -- recommended to keep this below 10
 local strokeColor = {
+    ["rainbow"] = false, -- set to true to use random colors instead of colors defined below
     ["red"] = 192, -- between 0 and 255
     ["green"] = 41, -- between 0 and 255
     ["blue"] = 66, -- between 0 and 255
@@ -46,9 +47,9 @@ function mousePointerIndicator()
 
             circles["mouseCircle" .. step] = hs.drawing.circle(hs.geometry.rect(coordX, coordY, offset, offset))
             circles["mouseCircle" .. step]:setStrokeColor({
-                ["red"] = strokeColor["red"] / 255,
-                ["blue"] = strokeColor["blue"] / 255,
-                ["green"] = strokeColor["green"] / 255,
+                ["red"] = fif(strokeColor["rainbow"], math.random(), strokeColor["red"] / 255),
+                ["green"] = fif(strokeColor["rainbow"], math.random(), strokeColor["green"] / 255),
+                ["blue"] = fif(strokeColor["rainbow"], math.random(), strokeColor["blue"] / 255),
                 ["alpha"] = strokeColor["alpha"]
             })
             circles["mouseCircle" .. step]:setStrokeWidth(step / 2)
@@ -57,8 +58,8 @@ function mousePointerIndicator()
             if filled then
                 circles["mouseCircle" .. step]:setFillColor({
                     ["red"] = fillColor["red"] / 255,
-                    ["blue"] = fillColor["blue"] / 255,
                     ["green"] = fillColor["green"] / 255,
+                    ["blue"] = fillColor["blue"] / 255,
                     ["alpha"] = fillColor["alpha"]
                 })
             end
@@ -72,6 +73,10 @@ function mousePointerIndicator()
         end)
         currentStep = currentStep + 1
     end
+end
+
+function fif(condition, if_true, if_false)
+    if condition then return if_true else return if_false end
 end
 
 eventtapLeftMouseDown = hs.eventtap.new({ hs.eventtap.event.types.leftMouseDown },
