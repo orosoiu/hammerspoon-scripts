@@ -10,4 +10,4 @@ A collection of scripts for the [Hammerspoon](http://www.hammerspoon.org) utilit
 ## Mouse pointer indicator
 Show a circle ripple effect around the mouse cursor when clicking the left mouse button. Can be used as an accessibility tool or for presentation mode to highlight the mouse cursor position.
 
-![Mouse pointer indicator](https://github.com/orosoiu/hammerspoon-scripts/blob/master/movies/mouse-pointer-indicator.gif)
+![Mouse pointer indicator](https://github.com/orosoiu/hammerspoon-scripts/blob/master/gifs/mouse-pointer-indicator.gif)
