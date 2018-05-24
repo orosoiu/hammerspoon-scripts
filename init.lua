@@ -3,14 +3,14 @@
 -- when holding a modifier key while clicking the left mouse button
 mousePointerIndicator_enabled = true
 mousePointerIndicator_noOfCircles = 6  -- recommended to keep this below 10
-mousePointerIndicator_circleColor_red = 250
-mousePointerIndicator_circleColor_green = 0
-mousePointerIndicator_circleColor_blue = 0
+mousePointerIndicator_circleColor_red = 192
+mousePointerIndicator_circleColor_green = 41
+mousePointerIndicator_circleColor_blue = 66
 mousePointerIndicator_circleColor_alpha = .8     -- between 0 and 1
 mousePointerIndicator_circleColor_filled = false
-mousePointerIndicator_circleColor_fill_red = 255
-mousePointerIndicator_circleColor_fill_green = 0
-mousePointerIndicator_circleColor_fill_blue = 0
+mousePointerIndicator_circleColor_fill_red = 236
+mousePointerIndicator_circleColor_fill_green = 208
+mousePointerIndicator_circleColor_fill_blue = 120
 mousePointerIndicator_circleColor_fill_alpha = .2     -- between 0 and 1
 
 function mousePointerIndicator()
