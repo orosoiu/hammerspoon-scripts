@@ -1,54 +1,76 @@
 -- mouse pointer indicator: show a circle ripple effect around the mouse cursor 
--- when holding a modifier key while clicking the left mouse button
+-- while clicking the left mouse button
 
 -- config section
-local mousePointerIndicator_noOfCircles = 6 -- recommended to keep this below 10
-local mousePointerIndicator_strokeColor_red = 192
-local mousePointerIndicator_strokeColor_green = 41
-local mousePointerIndicator_strokeColor_blue = 66
-local mousePointerIndicator_strokeColor_alpha = .8 -- between 0 and 1
-local mousePointerIndicator_filled = false
-local mousePointerIndicator_fillColor_red = 236
-local mousePointerIndicator_fillColor_green = 208
-local mousePointerIndicator_fillColor_blue = 120
-local mousePointerIndicator_fillColor_alpha = .2 -- between 0 and 1
+local animation = "sonar-out" -- valid values: sonar-out, sonar-in
+local noOfCircles = 6 -- recommended to keep this below 10
+local strokeColor = {
+    ["red"] = 192, -- between 0 and 255
+    ["green"] = 41, -- between 0 and 255
+    ["blue"] = 66, -- between 0 and 255
+    ["alpha"] = .8 -- between 0 and 1
+}
+local filled = false
+local fillColor = {
+    ["red"] = 236, -- between 0 and 255
+    ["green"] = 208, -- between 0 and 255
+    ["blue"] = 120, -- between 0 and 255
+    ["alpha"] = .2 -- between 0 and 1
+}
+
+-- metadata section
+local animationSteps = {
+    ["start"] = {
+        ["sonar-in"] = noOfCircles,
+        ["sonar-out"] = 1
+    },
+    ["end"] = {
+        ["sonar-in"] = 1,
+        ["sonar-out"] = noOfCircles
+    },
+    ["increment"] = {
+        ["sonar-in"] = -1,
+        ["sonar-out"] = 1
+    }
+}
 
 function mousePointerIndicator()
     local mousepoint = hs.mouse.getAbsolutePosition()
     local circles = {}
-
-    for circleNo = 1, mousePointerIndicator_noOfCircles do
-        hs.timer.doAfter(.06 * circleNo, function()
-            local offset = 10 + (circleNo * circleNo * 2)
+    local currentStep = 1
+    for step = animationSteps["start"][animation], animationSteps["end"][animation], animationSteps["increment"][animation] do
+        hs.timer.doAfter(.06 * currentStep, function()
+            local offset = 10 + (step * step * 2)
             local coordX = mousepoint.x - (offset / 2)
             local coordY = mousepoint.y - (offset / 2)
 
-            circles["mouseCircle" .. circleNo] = hs.drawing.circle(hs.geometry.rect(coordX, coordY, offset, offset))
-            circles["mouseCircle" .. circleNo]:setStrokeColor({
-                ["red"] = mousePointerIndicator_strokeColor_red / 255,
-                ["blue"] = mousePointerIndicator_strokeColor_blue / 255,
-                ["green"] = mousePointerIndicator_strokeColor_green / 255,
-                ["alpha"] = mousePointerIndicator_strokeColor_alpha
+            circles["mouseCircle" .. step] = hs.drawing.circle(hs.geometry.rect(coordX, coordY, offset, offset))
+            circles["mouseCircle" .. step]:setStrokeColor({
+                ["red"] = strokeColor["red"] / 255,
+                ["blue"] = strokeColor["blue"] / 255,
+                ["green"] = strokeColor["green"] / 255,
+                ["alpha"] = strokeColor["alpha"]
             })
-            circles["mouseCircle" .. circleNo]:setStrokeWidth(circleNo / 2)
+            circles["mouseCircle" .. step]:setStrokeWidth(step / 2)
 
-            circles["mouseCircle" .. circleNo]:setFill(mousePointerIndicator_filled)
-            if mousePointerIndicator_filled then
-                circles["mouseCircle" .. circleNo]:setFillColor({
-                    ["red"] = mousePointerIndicator_fillColor_red / 255,
-                    ["blue"] = mousePointerIndicator_fillColor_blue / 255,
-                    ["green"] = mousePointerIndicator_fillColor_green / 255,
-                    ["alpha"] = mousePointerIndicator_fillColor_alpha
+            circles["mouseCircle" .. step]:setFill(filled)
+            if filled then
+                circles["mouseCircle" .. step]:setFillColor({
+                    ["red"] = fillColor["red"] / 255,
+                    ["blue"] = fillColor["blue"] / 255,
+                    ["green"] = fillColor["green"] / 255,
+                    ["alpha"] = fillColor["alpha"]
                 })
             end
 
-            circles["mouseCircle" .. circleNo]:show()
+            circles["mouseCircle" .. step]:show()
 
             hs.timer.doAfter(.18, function()
-                circles["mouseCircle" .. circleNo]:delete()
-                circles["mouseCircle" .. circleNo] = nil
+                circles["mouseCircle" .. step]:delete()
+                circles["mouseCircle" .. step] = nil
             end)
         end)
+        currentStep = currentStep + 1
     end
 end
 
