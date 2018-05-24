@@ -35,7 +35,7 @@ local animationSteps = {
     }
 }
 
-function mousePointerIndicator()
+function showMousePointerIndicator()
     local mousepoint = hs.mouse.getAbsolutePosition()
     local circles = {}
     local currentStep = 1
@@ -77,7 +77,7 @@ end
 
 eventtapLeftMouseDown = hs.eventtap.new({ hs.eventtap.event.types.leftMouseDown },
     function(_)
-        mousePointerIndicator()
+        showMousePointerIndicator()
         return false
     end)
 eventtapLeftMouseDown:start()
