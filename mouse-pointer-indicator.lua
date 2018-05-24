@@ -11,8 +11,8 @@ local strokeColor = {
     ["blue"] = 66, -- between 0 and 255
     ["alpha"] = .8 -- between 0 and 1
 }
-local filled = false
 local fillColor = {
+    ["enabled"] = false,
     ["red"] = 236, -- between 0 and 255
     ["green"] = 208, -- between 0 and 255
     ["blue"] = 120, -- between 0 and 255
@@ -54,8 +54,8 @@ function mousePointerIndicator()
             })
             circles["mouseCircle" .. step]:setStrokeWidth(step / 2)
 
-            circles["mouseCircle" .. step]:setFill(filled)
-            if filled then
+            circles["mouseCircle" .. step]:setFill(fillColor["enabled"])
+            if fillColor["enabled"] then
                 circles["mouseCircle" .. step]:setFillColor({
                     ["red"] = fillColor["red"] / 255,
                     ["green"] = fillColor["green"] / 255,
