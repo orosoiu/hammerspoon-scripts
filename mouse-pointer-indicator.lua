@@ -57,7 +57,7 @@ end
 
 eventtapLeftMouseDown = hs.eventtap.new(
                             { hs.eventtap.event.types.leftMouseDown }, 
-                            function(event)
+                            function(_)
                                 mousePointerIndicator()
                                 return false
                             end
