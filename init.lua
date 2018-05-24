@@ -1,5 +1,5 @@
 -- enable or disable modules
-local mousePointerIndicator = false
+local mousePointerIndicator = true
 
 -- load modules
 if mousePointerIndicator then require 'mouse-pointer-indicator' end
