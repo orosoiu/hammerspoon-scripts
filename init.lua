@@ -1,7 +1,7 @@
 -- Config section
 -- mouse pointer indicator: show a circle ripple effect around the mouse cursor 
 -- when holding a modifier key while clicking the left mouse button
-mousePointerIndicator_enabled = false
+mousePointerIndicator_enabled = true
 mousePointerIndicator_noOfCircles = 6  -- recommended to keep this below 10
 mousePointerIndicator_circleColor_red = 250
 mousePointerIndicator_circleColor_green = 0
