@@ -74,7 +74,6 @@ function showMousePointerIndicator()
 
             hs.timer.doAfter(.18, function()
                 circle:delete()
-                circle = nil
             end)
         end)
         idx = idx + 1
