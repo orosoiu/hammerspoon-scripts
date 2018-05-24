@@ -18,3 +18,4 @@ Checkout config section in *mouse-pointer-indicator.lua* for additional goodies:
 * choose number of circles displayed during animation
 
 ![Mouse pointer indicator](https://github.com/orosoiu/hammerspoon-scripts/blob/master/demo/mouse-pointer-indicator.gif)
+![Mouse pointer indicator rainbow](https://github.com/orosoiu/hammerspoon-scripts/blob/master/demo/mouse-pointer-indicator-rainbow.gif)
